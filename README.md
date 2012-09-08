@@ -44,16 +44,16 @@ All request and response payloads are serialized JSON data.
 
 ### New Player (request) ###
 
-    {name: <string>}
+    {name: &lt;string&gt;}
 
 name of the new player.
 
 ### Player (response) ###
 
-    {id: <string>,
-     name: <string>,
-     score: <integer> or 'disqualified',
-     hand: [<Tile>*] or <integer>}
+    {id: &lt;string&gt;,
+     name: &lt;string&gt;,
+     score: &lt;integer&gt; or 'disqualified',
+     hand: [&lt;Tile&gt;*] or &lt;integer&gt;}
 
 id is a unique, opaque string identifying the player.
 
@@ -64,9 +64,9 @@ hand; otherwise, it is the number of tiles in the player's hand.
 
 ### New Game (request) ###
 
-    {rows: <integer>,
-     cols: <integer>,
-     seats: <integer>}
+    {rows: &lt;integer&gt;,
+     cols: &lt;integer&gt;,
+     seats: &lt;integer&gt;}
 
 rows and cols define the new board size and are required.
 
@@ -75,12 +75,12 @@ provided; defaults to 2 if absent.
 
 ### Game (response) ###
 
-    {rows: <integer>,
-     cols: <integer>,
-     draw_size: <integer>,
-     claims: [<Claim>*],
-     players: [<Player>*],
-     state: <Game State>}
+    {rows: &lt;integer&gt;,
+     cols: &lt;integer&gt;,
+     draw_size: &lt;integer&gt;,
+     claims: [&lt;Claim&gt;*],
+     players: [&lt;Player&gt;*],
+     state: &lt;Game State&gt;}
 
 rows and cols define the board size.
 
@@ -94,10 +94,10 @@ state is the current Game State.
 
 ### Game Delta (response) ###
 
-    {draw_size: <integer>,
-     claims: [<Claim>*],
-     players: [<Player>*],
-     state: <Game State>}
+    {draw_size: &lt;integer&gt;,
+     claims: [&lt;Claim&gt;*],
+     players: [&lt;Player&gt;*],
+     state: &lt;Game State&gt;}
 
 draw_size is the number of tiles remaining in the draw pool. will be present
 even if the value did not change since the request began.
@@ -118,7 +118,7 @@ See descriptions of game states below.
 
 ### New Move (request) ###
 
-    { tile: <Tile>, favor: <string> }
+    { tile: &lt;Tile&gt;, favor: &lt;string&gt; }
 
 or
 
@@ -136,13 +136,13 @@ the players involved in the tie, the move is considered illegal (malformed).
 
 ### Tile (response) ###
 
-    {row: <integer>,
-     col: <integer>}
+    {row: &lt;integer&gt;,
+     col: &lt;integer&gt;}
 
 ### Claim (response) ###
 
-    {tile: <Tile>,
-     owner: <string>}
+    {tile: &lt;Tile&gt;,
+     owner: &lt;string&gt;}
 
 Represents a claimed Tile on the board. owner is the player's unique, opaque ID
 string.
@@ -156,14 +156,14 @@ from the draw on setup.
 
 To spawn a new game on the server, POST to / with a New Game object as payload.
 You will receive a 201 Created response with the game's root path (henceforth
-<game path>) in the Location HTTP response header.
+&lt;game path&gt;) in the Location HTTP response header.
 
 ## GAME STATES ##
 
 ### INITIATING ###
 
 The game begins in this state. You join a game by POSTing to
-<game path>/players with a New Player object as payload.
+&lt;game path&gt;/players with a New Player object as payload.
 
 If you successfully join the game, you will receive a 200 OK response at the
 beginning of your first turn, with a Game object as response payload. This
@@ -177,11 +177,11 @@ Once the game is full the game moves to the in play state.
 
 ### IN PLAY ###
 
-In this state, players POST to <game path>/moves with New Move objects as
+In this state, players POST to &lt;game path&gt;/moves with New Move objects as
 payload. These requests must include an X-Turn-Token HTTP request header with
 the value of the last turn token they received from the server.
 
-After receiving a 200 OK response to a <game path>/players or <game path>/moves
+After receiving a 200 OK response to a &lt;game path&gt;/players or &lt;game path&gt;/moves
 POST request (indicating it is your turn) you are required to POST your next
 move within 30 seconds. If you fail to POST in that time, you are disqualified
 and the game moves to the completed state.
@@ -206,14 +206,14 @@ accepted.
 ## IDEMPOTENT VIEW ##
 
 At any point, the full game state can be requested with a GET request to
-<game path>. You will receive an immediate 200 OK response with a Game object.
+&lt;game path&gt;. You will receive an immediate 200 OK response with a Game object.
 
 ## OBSERVERS ##
 
 (Intended for use by game viewer, but may be used by others.)
 
-At any point, an observer may be registered by POSTing to <game
-path>/observers. This will begin a long-running unbounded HTTP response of
+At any point, an observer may be registered by POSTing to &lt;game
+path&gt;/observers. This will begin a long-running unbounded HTTP response of
 type application/x-multi-json , which is a series of one-line json
 documents separated by newlines.
 
