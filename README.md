@@ -44,16 +44,16 @@ All request and response payloads are serialized JSON data.
 
 ### New Player (request) ###
 
-    {name: &lt;string&gt;}
+    {name: <string>}
 
 name of the new player.
 
 ### Player (response) ###
 
-    {id: &lt;string&gt;,
-     name: &lt;string&gt;,
-     score: &lt;integer&gt; or 'disqualified',
-     hand: [&lt;Tile&gt;*] or &lt;integer&gt;}
+    {id: <string>,
+     name: <string>,
+     score: <integer> or 'disqualified',
+     hand: [<Tile>*] or <integer>}
 
 id is a unique, opaque string identifying the player.
 
@@ -64,9 +64,9 @@ hand; otherwise, it is the number of tiles in the player's hand.
 
 ### New Game (request) ###
 
-    {rows: &lt;integer&gt;,
-     cols: &lt;integer&gt;,
-     seats: &lt;integer&gt;}
+    {rows: <integer>,
+     cols: <integer>,
+     seats: <integer>}
 
 rows and cols define the new board size and are required.
 
@@ -75,12 +75,12 @@ provided; defaults to 2 if absent.
 
 ### Game (response) ###
 
-    {rows: &lt;integer&gt;,
-     cols: &lt;integer&gt;,
-     draw_size: &lt;integer&gt;,
-     claims: [&lt;Claim&gt;*],
-     players: [&lt;Player&gt;*],
-     state: &lt;Game State&gt;}
+    {rows: <integer>,
+     cols: <integer>,
+     draw_size: <integer>,
+     claims: [<Claim>*],
+     players: [<Player>*],
+     state: <Game State>}
 
 rows and cols define the board size.
 
@@ -94,10 +94,10 @@ state is the current Game State.
 
 ### Game Delta (response) ###
 
-    {draw_size: &lt;integer&gt;,
-     claims: [&lt;Claim&gt;*],
-     players: [&lt;Player&gt;*],
-     state: &lt;Game State&gt;}
+    {draw_size: <integer>,
+     claims: [<Claim>*],
+     players: [<Player>*],
+     state: <Game State>}
 
 draw_size is the number of tiles remaining in the draw pool. will be present
 even if the value did not change since the request began.
@@ -118,8 +118,8 @@ See descriptions of game states below.
 
 ### New Move (request) ###
 
-    { tile: &lt;Tile&gt;,
-      favor: &lt;string&gt; }
+    { tile: <Tile>,
+      favor: <string> }
 
 or
 
@@ -137,13 +137,13 @@ the players involved in the tie, the move is considered illegal (malformed).
 
 ### Tile (response) ###
 
-    {row: &lt;integer&gt;,
-     col: &lt;integer&gt;}
+    {row: <integer>,
+     col: <integer>}
 
 ### Claim (response) ###
 
-    {tile: &lt;Tile&gt;,
-     owner: &lt;string&gt;}
+    {tile: <Tile>,
+     owner: <string>}
 
 Represents a claimed Tile on the board. owner is the player's unique, opaque ID
 string.
@@ -229,7 +229,7 @@ The POST request requires no payload. However, if the payload includes a
 "wrapper" key, then each JSON document will be fprint'ed into that text,
 replacing the first %s. For instance, a HTML comet technique:
 
-    { "wrapper": "&lt;script type='text/javascript'&gt;myUpdater(%s);&lt;/script&gt;\n" }
+    { "wrapper": "<script type='text/javascript'>myUpdater(%s);</script>\n" }
 
 ## MATCHMAKING ##
 
