@@ -80,6 +80,7 @@ provided; defaults to 2 if absent.
      draw_size: <integer>,
      claims: [<Claim>*],
      players: [<Player>*],
+     player_id: <string>,
      state: <Game State>}
 
 rows and cols define the board size.
@@ -89,6 +90,8 @@ draw_size is the number of tiles remaining in the draw pool.
 claims is the set of Claims already present on the board.
 
 players is the set of Players joined to the game.
+
+player_id is your player id, or null if you are an observer.
 
 state is the current Game State.
 
