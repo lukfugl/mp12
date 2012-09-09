@@ -126,9 +126,9 @@ See descriptions of game states below.
 
 or
 
-    'PASS'
+    "PASS"
 
-the string 'PASS' indicates the player passes on this turn.
+the string "PASS" indicates the player passes on this turn.
 
 tile is the Tile to play on the board. it must be previously unclaimed and in
 the player's hand.
